@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FaUser, FaBriefcase, FaEye, FaEyeSlash, FaWallet, FaImage, FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
+import { FaUser, FaBriefcase, FaEye, FaEyeSlash, FaImage, FaGithub, FaLinkedin, FaTwitter, FaTimes } from "react-icons/fa";
 import { motion } from "framer-motion";
 
 const RegistrationForm = () => {
@@ -12,7 +12,6 @@ const RegistrationForm = () => {
     skills: [],
     hourlyRate: 0,
     availability: [],
-    walletAddress: "",
     bio: "",
     socialLinks: {
       github: "",
@@ -23,34 +22,53 @@ const RegistrationForm = () => {
     budgetRange: [0, 1000]
   });
   const [showPassword, setShowPassword] = useState(false);
+  const [newSkill, setNewSkill] = useState("");
 
   const handleUserTypeSelection = (type) => {
     setUserType(type);
     setStep(1);
   };
 
+  const handleAddSkill = (e) => {
+    e.preventDefault();
+    if (newSkill.trim() !== "" && !formData.skills.includes(newSkill.trim())) {
+      setFormData({
+        ...formData,
+        skills: [...formData.skills, newSkill.trim()]
+      });
+      setNewSkill("");
+    }
+  };
+
+  const handleRemoveSkill = (skillToRemove) => {
+    setFormData({
+      ...formData,
+      skills: formData.skills.filter(skill => skill !== skillToRemove)
+    });
+  };
+
   const renderUserTypeSelection = () => (
-    <div className="grid md:grid-cols-2 gap-8 p-6">
+    <div className="grid md:grid-cols-1 gap-8 p-6">
       <motion.div
         whileHover={{ scale: 1.05 }}
-        className="p-8 bg-white rounded-xl shadow-lg cursor-pointer"
+        className="p-8 bg-white rounded-xl shadow-lg cursor-pointer hover:shadow-2xl transition-all duration-300"
         onClick={() => handleUserTypeSelection("freelancer")}
       >
         <div className="flex flex-col items-center space-y-4">
           <FaUser className="w-16 h-16 text-blue-500" />
-          <h3 className="text-2xl font-bold">Register as Freelancer</h3>
+          <h3 className="text-2xl font-bold text-blue-600">Register as Freelancer</h3>
           <p className="text-gray-600 text-center">Showcase your skills and find exciting projects</p>
         </div>
       </motion.div>
 
       <motion.div
         whileHover={{ scale: 1.05 }}
-        className="p-8 bg-white rounded-xl shadow-lg cursor-pointer"
+        className="p-8 bg-white rounded-xl shadow-lg cursor-pointer hover:shadow-2xl transition-all duration-300"
         onClick={() => handleUserTypeSelection("client")}
       >
         <div className="flex flex-col items-center space-y-4">
           <FaBriefcase className="w-16 h-16 text-green-500" />
-          <h3 className="text-2xl font-bold">Register as Client</h3>
+          <h3 className="text-2xl font-bold text-green-600">Register as Client</h3>
           <p className="text-gray-600 text-center">Find talented freelancers for your projects</p>
         </div>
       </motion.div>
@@ -63,7 +81,7 @@ const RegistrationForm = () => {
         <label className="block text-sm font-medium text-gray-700">Full Name</label>
         <input
           type="text"
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 transition-all duration-300"
           value={formData.fullName}
           onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
         />
@@ -73,7 +91,7 @@ const RegistrationForm = () => {
         <label className="block text-sm font-medium text-gray-700">Email</label>
         <input
           type="email"
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 transition-all duration-300"
           value={formData.email}
           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
         />
@@ -84,7 +102,7 @@ const RegistrationForm = () => {
         <div className="relative">
           <input
             type={showPassword ? "text" : "password"}
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 transition-all duration-300"
             value={formData.password}
             onChange={(e) => setFormData({ ...formData, password: e.target.value })}
           />
@@ -104,16 +122,35 @@ const RegistrationForm = () => {
     <div className="space-y-6">
       <div>
         <label className="block text-sm font-medium text-gray-700">Skills</label>
-        <select
-          multiple
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-          value={formData.skills}
-          onChange={(e) => setFormData({ ...formData, skills: Array.from(e.target.selectedOptions, option => option.value) })}
-        >
-          <option value="programming">Programming</option>
-          <option value="design">Design</option>
-          <option value="writing">Writing</option>
-        </select>
+        <div className="mt-2 flex flex-wrap gap-2">
+          {formData.skills.map((skill, index) => (
+            <div key={index} className="flex items-center bg-blue-100 rounded-full px-3 py-1 transition-all duration-300 hover:bg-blue-200">
+              <span className="text-sm text-blue-800">{skill}</span>
+              <button
+                type="button"
+                onClick={() => handleRemoveSkill(skill)}
+                className="ml-2 text-blue-600 hover:text-blue-800"
+              >
+                <FaTimes className="w-3 h-3" />
+              </button>
+            </div>
+          ))}
+        </div>
+        <form onSubmit={handleAddSkill} className="mt-2 flex">
+          <input
+            type="text"
+            value={newSkill}
+            onChange={(e) => setNewSkill(e.target.value)}
+            className="flex-1 rounded-l-md border-gray-300 focus:border-blue-500 focus:ring-blue-500 transition-all duration-300"
+            placeholder="Add a skill"
+          />
+          <button
+            type="submit"
+            className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-r-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-300"
+          >
+            Add
+          </button>
+        </form>
       </div>
 
       <div>
@@ -122,7 +159,7 @@ const RegistrationForm = () => {
           type="range"
           min="0"
           max="200"
-          className="mt-1 block w-full"
+          className="mt-1 block w-full accent-blue-600"
           value={formData.hourlyRate}
           onChange={(e) => setFormData({ ...formData, hourlyRate: e.target.value })}
         />
@@ -131,30 +168,11 @@ const RegistrationForm = () => {
     </div>
   );
 
-  const renderWalletConnection = () => (
-    <div className="space-y-6">
-      <div>
-        <label className="block text-sm font-medium text-gray-700">Wallet Address</label>
-        <div className="mt-1 flex rounded-md shadow-sm">
-          <span className="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500">
-            <FaWallet />
-          </span>
-          <input
-            type="text"
-            className="flex-1 block w-full rounded-none rounded-r-md border-gray-300 focus:border-blue-500 focus:ring-blue-500"
-            value={formData.walletAddress}
-            onChange={(e) => setFormData({ ...formData, walletAddress: e.target.value })}
-          />
-        </div>
-      </div>
-    </div>
-  );
-
   const renderOptionalInfo = () => (
     <div className="space-y-6">
       <div>
         <label className="block text-sm font-medium text-gray-700">Profile Picture</label>
-        <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
+        <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md hover:border-blue-500 transition-all duration-300">
           <div className="space-y-1 text-center">
             <FaImage className="mx-auto h-12 w-12 text-gray-400" />
             <div className="flex text-sm text-gray-600">
@@ -170,7 +188,7 @@ const RegistrationForm = () => {
       <div>
         <label className="block text-sm font-medium text-gray-700">Bio</label>
         <textarea
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 transition-all duration-300"
           rows="4"
           value={formData.bio}
           onChange={(e) => setFormData({ ...formData, bio: e.target.value })}
@@ -183,7 +201,7 @@ const RegistrationForm = () => {
           <FaGithub className="text-gray-400" />
           <input
             type="url"
-            className="flex-1 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+            className="flex-1 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 transition-all duration-300"
             placeholder="GitHub URL"
             value={formData.socialLinks.github}
             onChange={(e) => setFormData({ ...formData, socialLinks: { ...formData.socialLinks, github: e.target.value } })}
@@ -193,7 +211,7 @@ const RegistrationForm = () => {
           <FaLinkedin className="text-gray-400" />
           <input
             type="url"
-            className="flex-1 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+            className="flex-1 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 transition-all duration-300"
             placeholder="LinkedIn URL"
             value={formData.socialLinks.linkedin}
             onChange={(e) => setFormData({ ...formData, socialLinks: { ...formData.socialLinks, linkedin: e.target.value } })}
@@ -203,7 +221,7 @@ const RegistrationForm = () => {
           <FaTwitter className="text-gray-400" />
           <input
             type="url"
-            className="flex-1 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+            className="flex-1 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 transition-all duration-300"
             placeholder="Twitter URL"
             value={formData.socialLinks.twitter}
             onChange={(e) => setFormData({ ...formData, socialLinks: { ...formData.socialLinks, twitter: e.target.value } })}
@@ -222,8 +240,6 @@ const RegistrationForm = () => {
       case 2:
         return userType === "freelancer" ? renderFreelancerDetails() : null;
       case 3:
-        return renderWalletConnection();
-      case 4:
         return renderOptionalInfo();
       default:
         return null;
@@ -231,7 +247,7 @@ const RegistrationForm = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
           Create your account
@@ -239,13 +255,13 @@ const RegistrationForm = () => {
       </div>
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+        <div className="bg-white py-8 px-4 shadow-lg sm:rounded-lg sm:px-10 hover:shadow-xl transition-all duration-300">
           <div className="mb-8">
             <div className="flex justify-between items-center">
-              {[1, 2, 3, 4].map((i) => (
+              {[1, 2, 3].map((i) => (
                 <div
                   key={i}
-                  className={`w-3 h-3 rounded-full ${i <= step ? "bg-blue-600" : "bg-gray-200"}`}
+                  className={`w-3 h-3 rounded-full ${i <= step ? "bg-blue-600" : "bg-gray-200"} transition-all duration-300`}
                 ></div>
               ))}
             </div>
@@ -258,16 +274,16 @@ const RegistrationForm = () => {
               <button
                 type="button"
                 onClick={() => setStep(step - 1)}
-                className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+                className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition-all duration-300"
               >
                 Back
               </button>
               <button
                 type="button"
                 onClick={() => setStep(step + 1)}
-                className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-300"
               >
-                {step === 4 ? "Submit" : "Next"}
+                {step === 3 ? "Submit" : "Next"}
               </button>
             </div>
           )}
