@@ -9,6 +9,7 @@ import LoginPage from "./Comp/LoginForm";
 import HeroSection from "./Comp/HeroSection";
 import DecentralizedFeatures from "./Comp/Features";
 import HowItWorks from "./Comp/HowItWorks";
+import Footer from "./Comp/Footer";
 
 function App() {
   // Animation variants for scroll
@@ -74,7 +75,7 @@ function App() {
         <LoginPage />
       </motion.div>
 
-
+<Footer />
 
 
     </>
