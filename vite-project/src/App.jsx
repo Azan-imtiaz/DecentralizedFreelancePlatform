@@ -5,11 +5,13 @@ import './App.css'
 import RegistrationForm from './comp/registrationForm'
 import NavBar from './Comp/Navbar'
 import LoginPage from './Comp/LoginForm'
+import HeroSection from './Comp/HeroSection'
 function App() {
   
   return (
     <>
      <NavBar />
+     <HeroSection />
      <RegistrationForm />
      <LoginPage />
       </>
