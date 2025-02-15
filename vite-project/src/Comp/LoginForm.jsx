@@ -1,8 +1,16 @@
-import React, { useState } from "react";
+import React, { useState ,useContext} from "react";
 import { FaEye, FaEyeSlash, FaEnvelope, FaLock } from "react-icons/fa";
 import ReCAPTCHA from "react-google-recaptcha";
+import { useNavigate } from 'react-router-dom';
+import MyContext from "../context/createContext";
+
+
+
+
 
 const LoginPage = () => {
+  const { user, login,logout } = useContext(MyContext);
+  const navigator = useNavigate();
   const [role, setRole] = useState("freelancer");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -11,6 +19,7 @@ const LoginPage = () => {
   const [passwordError, setPasswordError] = useState("");
   const [isCaptchaVerified, setIsCaptchaVerified] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
+
 
   const validateEmail = (email) => {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -41,6 +50,8 @@ const LoginPage = () => {
     e.preventDefault();
     if (validateEmail(email) && password.length >= 8 && isCaptchaVerified) {
       console.log("Form submitted", { email, password, role, rememberMe });
+      login();
+      navigator("/");
     }
   };
 
@@ -145,9 +156,9 @@ const LoginPage = () => {
           </button>
         </form>
 
-        <p className="mt-8 text-center text-sm text-gray-600">
+        <p className="mt-8 text-center text-sm text-gray-600" >
           Don't have an account?{" "}
-          <a href="#" className="text-blue-500 hover:text-blue-600 font-semibold">
+          <a href="#" className="text-blue-500 hover:text-blue-600 font-semibold" onClick={()=>navigator("/RegisterPage")}>
             Sign up
           </a>
         </p>

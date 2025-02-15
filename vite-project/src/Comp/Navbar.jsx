@@ -1,12 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect ,useContext} from "react";
 import { FaWallet, FaBars, FaTimes, FaUserCircle } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+import MyContext from "../context/createContext";
 
 const NavBar = () => {
+ const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const [isWalletConnected, setIsWalletConnected] = useState(false);
   const [walletAddress, setWalletAddress] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showProfileMenu, setShowProfileMenu] = useState(false);
+  const { user, login,logout } = useContext(MyContext);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -27,12 +31,19 @@ const NavBar = () => {
   };
 
   const handleLogin = () => {
-    setIsLoggedIn(true);
+    // setIsLoggedIn(true);
+    navigate("/login");
   };
-
+  const handleRegisterClick = () => {
+    console.log("Navigating to /RegisterPage");
+    navigate("/RegisterPage");
+  };
+  
   const handleLogout = () => {
-    setIsLoggedIn(false);
+    navigate("/");
+    // setIsLoggedIn(false);
     setShowProfileMenu(false);
+    logout();
   };
 
   const truncateAddress = (address) => {
@@ -75,7 +86,7 @@ const NavBar = () => {
                 : "Connect Wallet"}
             </button>
 
-            {isLoggedIn ? (
+            { user ? (
               <div className="relative">
                 <button
                   onClick={toggleProfileMenu}
@@ -103,7 +114,8 @@ const NavBar = () => {
                 >
                   Login
                 </button>
-                <button className="px-4 py-2 rounded-lg bg-gray-600 text-white font-medium hover:bg-gray-700 transition-colors">
+                <button className="px-4 py-2 rounded-lg bg-gray-600 text-white font-medium hover:bg-gray-700 transition-colors"
+               onClick={handleRegisterClick}>
                   Register
                 </button>
               </div>
@@ -125,7 +137,7 @@ const NavBar = () => {
         </div>
       </div>
 
-      {isOpen && (
+      { user && (
         <div className="md:hidden bg-gray-900/95 backdrop-blur-lg">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
             {["Home", "Projects", "Freelancers"].map((item) => (
@@ -145,7 +157,7 @@ const NavBar = () => {
                 ? truncateAddress(walletAddress)
                 : "Connect Wallet"}
             </button>
-            {isLoggedIn ? (
+            {isOpen ? (
               <button
                 onClick={handleLogout}
                 className="w-full text-left px-3 py-2 text-gray-300 hover:text-white hover:bg-blue-700/30 rounded-md"
@@ -160,8 +172,11 @@ const NavBar = () => {
                   className="w-full text-left px-3 py-2 text-gray-300 hover:text-white hover:bg-blue-700/30 rounded-md"
                 >
                   Login
+               
                 </button>
-                <button className="w-full text-left px-3 py-2 text-gray-300 hover:text-white hover:bg-blue-700/30 rounded-md">
+                 <button className="w-full text-left px-3 py-2 text-gray-300 hover:text-white hover:bg-blue-700/30 rounded-md"
+               onClick={handleRegisterClick}
+               >
                   Register
                 </button>
               </>

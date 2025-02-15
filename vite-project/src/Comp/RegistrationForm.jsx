@@ -1,3 +1,8 @@
+
+
+
+
+
 import React, { useState } from "react";
 import { FaUser, FaBriefcase, FaEye, FaEyeSlash, FaImage, FaGithub, FaLinkedin, FaTwitter, FaTimes } from "react-icons/fa";
 import { motion } from "framer-motion";
@@ -76,33 +81,33 @@ const RegistrationForm = () => {
   );
 
   const renderPersonalInfo = () => (
-    <div className="space-y-6">
+    <div className="space-y-8">
       <div>
-        <label className="block text-sm font-medium text-gray-700">Full Name</label>
+        <label className="block text-base font-medium text-gray-700">Full Name</label>
         <input
           type="text"
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 transition-all duration-300"
+          className="mt-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 transition-all duration-300 p-3 text-lg"
           value={formData.fullName}
           onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
         />
       </div>
-
+  
       <div>
-        <label className="block text-sm font-medium text-gray-700">Email</label>
+        <label className="block text-base font-medium text-gray-700">Email</label>
         <input
           type="email"
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 transition-all duration-300"
+          className="mt-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 transition-all duration-300 p-3 text-lg"
           value={formData.email}
           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
         />
       </div>
-
+  
       <div className="relative">
-        <label className="block text-sm font-medium text-gray-700">Password</label>
+        <label className="block text-base font-medium text-gray-700">Password</label>
         <div className="relative">
           <input
             type={showPassword ? "text" : "password"}
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 transition-all duration-300"
+            className="mt-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 transition-all duration-300 p-3 text-lg"
             value={formData.password}
             onChange={(e) => setFormData({ ...formData, password: e.target.value })}
           />
@@ -117,57 +122,107 @@ const RegistrationForm = () => {
       </div>
     </div>
   );
+  
+  
+  // const renderFreelancerDetails = () => (
+  //   <div className="space-y-6">
+  //     <div>
+  //       <label className="block text-sm font-medium text-gray-700">Skills</label>
+  //       <div className="mt-2 flex flex-wrap gap-2">
+  //         {formData.skills.map((skill, index) => (
+  //           <div key={index} className="flex items-center bg-blue-100 rounded-full px-3 py-1 transition-all duration-300 hover:bg-blue-200">
+  //             <span className="text-sm text-blue-800">{skill}</span>
+  //             <button
+  //               type="button"
+  //               onClick={() => handleRemoveSkill(skill)}
+  //               className="ml-2 text-blue-600 hover:text-blue-800"
+  //             >
+  //               <FaTimes className="w-3 h-3" />
+  //             </button>
+  //           </div>
+  //         ))}
+  //       </div>
+  //       <form onSubmit={handleAddSkill} className="mt-2 flex">
+  //         <input
+  //           type="text"
+  //           value={newSkill}
+  //           onChange={(e) => setNewSkill(e.target.value)}
+  //           className="flex-1 rounded-l-md border-gray-300 focus:border-blue-500 focus:ring-blue-500 transition-all duration-300"
+  //           placeholder="Add a skill"
+  //         />
+  //         <button
+  //           type="submit"
+  //           className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-r-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-300"
+  //         >
+  //           Add
+  //         </button>
+  //       </form>
+  //     </div>
 
+  //     <div>
+  //       <label className="block text-sm font-medium text-gray-700">Hourly Rate ($)</label>
+  //       <input
+  //         type="range"
+  //         min="0"
+  //         max="200"
+  //         className="mt-1 block w-full accent-blue-600"
+  //         value={formData.hourlyRate}
+  //         onChange={(e) => setFormData({ ...formData, hourlyRate: e.target.value })}
+  //       />
+  //       <span className="text-gray-600">${formData.hourlyRate}/hour</span>
+  //     </div>
+  //   </div>
+  // );
   const renderFreelancerDetails = () => (
-    <div className="space-y-6">
+    <div className="space-y-8">
       <div>
-        <label className="block text-sm font-medium text-gray-700">Skills</label>
-        <div className="mt-2 flex flex-wrap gap-2">
+        <label className="block text-base font-medium text-gray-700">Skills</label>
+        <div className="mt-3 flex flex-wrap gap-3">
           {formData.skills.map((skill, index) => (
-            <div key={index} className="flex items-center bg-blue-100 rounded-full px-3 py-1 transition-all duration-300 hover:bg-blue-200">
-              <span className="text-sm text-blue-800">{skill}</span>
+            <div key={index} className="flex items-center bg-blue-100 rounded-full px-4 py-2 transition-all duration-300 hover:bg-blue-200">
+              <span className="text-lg text-blue-800">{skill}</span>
               <button
                 type="button"
                 onClick={() => handleRemoveSkill(skill)}
-                className="ml-2 text-blue-600 hover:text-blue-800"
+                className="ml-3 text-blue-600 hover:text-blue-800"
               >
-                <FaTimes className="w-3 h-3" />
+                <FaTimes className="w-4 h-4" />
               </button>
             </div>
           ))}
         </div>
-        <form onSubmit={handleAddSkill} className="mt-2 flex">
+        <form onSubmit={handleAddSkill} className="mt-3 flex">
           <input
             type="text"
             value={newSkill}
             onChange={(e) => setNewSkill(e.target.value)}
-            className="flex-1 rounded-l-md border-gray-300 focus:border-blue-500 focus:ring-blue-500 transition-all duration-300"
+            className="flex-1 rounded-l-md border-gray-300 p-4 text-lg focus:border-blue-500 focus:ring-blue-500 transition-all duration-300"
             placeholder="Add a skill"
           />
           <button
             type="submit"
-            className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-r-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-300"
+            className="inline-flex items-center px-6 py-3 text-lg font-medium rounded-r-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-300 shadow-md hover:shadow-lg"
           >
             Add
           </button>
         </form>
       </div>
-
+  
       <div>
-        <label className="block text-sm font-medium text-gray-700">Hourly Rate ($)</label>
+        <label className="block text-base font-medium text-gray-700">Hourly Rate ($)</label>
         <input
           type="range"
           min="0"
           max="200"
-          className="mt-1 block w-full accent-blue-600"
+          className="mt-2 block w-full accent-blue-600"
           value={formData.hourlyRate}
           onChange={(e) => setFormData({ ...formData, hourlyRate: e.target.value })}
         />
-        <span className="text-gray-600">${formData.hourlyRate}/hour</span>
+        <span className="text-lg text-gray-600">${formData.hourlyRate}/hour</span>
       </div>
     </div>
   );
-
+  
   const renderOptionalInfo = () => (
     <div className="space-y-6">
       <div>
