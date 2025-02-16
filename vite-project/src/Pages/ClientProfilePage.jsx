@@ -10,6 +10,8 @@ import DecentralizedFeatures from "../Comp/Features";
 import ClientProfile from "../Comp/ClientProfile";
 import HowItWorks from "../Comp/HowItWorks";
 import Footer from "../Comp/Footer";
+import CustomerSupport  from "../Comp/CustomerSupport";
+
 
 function ClientProfilePage() {
   // Animation variants for scroll
@@ -64,7 +66,6 @@ function ClientProfilePage() {
       </motion.div>
 
 
-
       <motion.div
         variants={fadeIn}
         initial="hidden"
@@ -72,8 +73,9 @@ function ClientProfilePage() {
         viewport={{ once: false, amount: 0.2 }}
         transition={{ duration: 1, ease: "easeOut", delay: 0.6 }}
       >
-        {/* <LoginPage /> */}
+        <CustomerSupport />
       </motion.div>
+
 
 <Footer />
 

@@ -11,6 +11,7 @@ import ClientProfile from "../Comp/ClientProfile";
 import BidNowComp from "../Comp/BidNowComp";
 import HowItWorks from "../Comp/HowItWorks";
 import Footer from "../Comp/Footer";
+import CustomerSupport  from "../Comp/CustomerSupport";
 
 function BidNowPage() {
   // Animation variants for scroll
@@ -73,9 +74,9 @@ function BidNowPage() {
         viewport={{ once: false, amount: 0.2 }}
         transition={{ duration: 1, ease: "easeOut", delay: 0.6 }}
       >
-        {/* <LoginPage /> */}
+        <CustomerSupport />
       </motion.div>
-
+      
 <Footer />
 
 

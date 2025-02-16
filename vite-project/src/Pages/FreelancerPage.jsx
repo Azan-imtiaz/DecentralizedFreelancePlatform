@@ -1,5 +1,5 @@
 import ProjectCreationForm  from "../Comp/createPost";
-
+import CustomerSupport from "../Comp/CustomerSupport";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import RegistrationForm from "../comp/registrationForm";
@@ -64,7 +64,6 @@ function CreateProjectPostPage() {
       </motion.div>
 
 
-
       <motion.div
         variants={fadeIn}
         initial="hidden"
@@ -72,7 +71,7 @@ function CreateProjectPostPage() {
         viewport={{ once: false, amount: 0.2 }}
         transition={{ duration: 1, ease: "easeOut", delay: 0.6 }}
       >
-        {/* <LoginPage /> */}
+        <CustomerSupport />
       </motion.div>
 
 <Footer />

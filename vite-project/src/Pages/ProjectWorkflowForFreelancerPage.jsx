@@ -11,7 +11,7 @@ import DecentralizedFeatures from "../Comp/Features";
 import ClientProfile from "../Comp/ClientProfile";
 import HowItWorks from "../Comp/HowItWorks";
 import Footer from "../Comp/Footer";
-
+import CustomerSupport from "../Comp/CustomerSupport";
 function ProjectWorkflowForFreelancerPage() {
   // Animation variants for scroll
   const fadeIn = {
@@ -65,7 +65,6 @@ function ProjectWorkflowForFreelancerPage() {
       </motion.div>
 
 
-
       <motion.div
         variants={fadeIn}
         initial="hidden"
@@ -73,8 +72,9 @@ function ProjectWorkflowForFreelancerPage() {
         viewport={{ once: false, amount: 0.2 }}
         transition={{ duration: 1, ease: "easeOut", delay: 0.6 }}
       >
-        {/* <LoginPage /> */}
+        <CustomerSupport />
       </motion.div>
+
 
 <Footer />
 

@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
-
+import CustomerSupport from "../Comp/CustomerSupport";
 import RegistrationForm from "../comp/registrationForm";
 import NavBar from "../Comp/Navbar";
 import Login from "../Comp/LoginForm";
@@ -53,16 +53,16 @@ function LoginPage() {
       </motion.div>
 
 
-{/* 
       <motion.div
         variants={fadeIn}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: false, amount: 0.2 }}
         transition={{ duration: 1, ease: "easeOut", delay: 0.6 }}
-      > */}
-        {/* <LoginPage /> */}
-      {/* </motion.div> */}
+      >
+        <CustomerSupport />
+      </motion.div>
+
 
 <Footer />
 

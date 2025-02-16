@@ -7,6 +7,7 @@ import HeroSection from "../Comp/HeroSection";
 import DecentralizedFeatures from "../Comp/Features";
 import HowItWorks from "../Comp/HowItWorks";
 import Footer from "../Comp/Footer";
+import CustomerSupport from "../Comp/CustomerSupport";
 
 
 function RegisterPage() {
@@ -53,6 +54,15 @@ function RegisterPage() {
         <HowItWorks />
       </motion.div>
 
+      <motion.div
+        variants={fadeIn}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: false, amount: 0.2 }}
+        transition={{ duration: 1, ease: "easeOut", delay: 0.6 }}
+      >
+        <CustomerSupport />
+      </motion.div>
 
 
 

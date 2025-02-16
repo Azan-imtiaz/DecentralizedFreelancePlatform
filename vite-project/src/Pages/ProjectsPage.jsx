@@ -1,5 +1,6 @@
 import ProjectPageComp  from "../Comp/projectPageComp";
-
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import RegistrationForm from "../comp/registrationForm";
@@ -9,8 +10,10 @@ import HeroSection from "../Comp/HeroSection";
 import DecentralizedFeatures from "../Comp/Features";
 import HowItWorks from "../Comp/HowItWorks";
 import Footer from "../Comp/Footer";
+import CustomerSupport from "../Comp/CustomerSupport";
 
 function CreateProjectPostPage() {
+  const navigator=useNavigate();
   // Animation variants for scroll
   const fadeIn = {
     hidden: { opacity: 0, y: 50 },
@@ -71,8 +74,9 @@ function CreateProjectPostPage() {
         viewport={{ once: false, amount: 0.2 }}
         transition={{ duration: 1, ease: "easeOut", delay: 0.6 }}
       >
-        {/* <LoginPage /> */}
+        <CustomerSupport />
       </motion.div>
+
 
 <Footer />
 

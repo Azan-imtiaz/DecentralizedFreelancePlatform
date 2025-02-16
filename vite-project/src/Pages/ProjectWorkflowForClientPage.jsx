@@ -11,7 +11,7 @@ import ClientProfile from "../Comp/ClientProfile";
 import ProjectWorkflowForClient from "../Comp/ProjectWorkflowForClient";
 import HowItWorks from "../Comp/HowItWorks";
 import Footer from "../Comp/Footer";
-
+import CustomerSupport from "../Comp/CustomerSupport";
 function ClientProfilePage() {
   // Animation variants for scroll
   const fadeIn = {
@@ -73,8 +73,9 @@ function ClientProfilePage() {
         viewport={{ once: false, amount: 0.2 }}
         transition={{ duration: 1, ease: "easeOut", delay: 0.6 }}
       >
-        {/* <LoginPage /> */}
+        <CustomerSupport />
       </motion.div>
+
 
 <Footer />
 
