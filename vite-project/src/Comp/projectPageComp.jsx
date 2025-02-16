@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FiSearch, FiFilter, FiPlus } from "react-icons/fi";
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
 import { format } from "date-fns";
 import Select from "react-select";
 import DatePicker from "react-datepicker";
@@ -9,6 +10,7 @@ import "rc-slider/assets/index.css";
 import "react-datepicker/dist/react-datepicker.css";
 
 const ProjectsPage = () => {
+  const navigator=useNavigate();
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
@@ -91,12 +93,14 @@ const ProjectsPage = () => {
         </div>
       </div>
       <div className="flex gap-2">
-        <button className="flex-1 bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors duration-300">
+        <button className="flex-1 bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors duration-300"
+        onClick={()=>{navigator("/bidbowpage")}}
+        >
           Bid Now
         </button>
-        <button className="flex-1 border border-gray-300 text-gray-700 py-2 px-4 rounded-md hover:bg-gray-50 transition-colors duration-300">
+        {/* <button className="flex-1 border border-gray-300 text-gray-700 py-2 px-4 rounded-md hover:bg-gray-50 transition-colors duration-300">
           Show Bids
-        </button>
+        </button> */}
       </div>
     </div>
   );
@@ -118,7 +122,7 @@ const ProjectsPage = () => {
           </div>
           <button
             className="bg-blue-600 text-white px-6 py-3 rounded-lg flex items-center gap-2 hover:bg-blue-700 transition-colors duration-300"
-            onClick={() => {}}
+            onClick={() => navigator("/createPost")}
           >
             <FiPlus /> Create Project
           </button>

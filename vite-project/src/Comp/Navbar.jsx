@@ -18,6 +18,7 @@ const NavBar = () => {
 
   const toggleProfileMenu = () => {
     setShowProfileMenu(!showProfileMenu);
+    
   };
 
   const handleWalletConnection = () => {
@@ -61,19 +62,34 @@ const NavBar = () => {
             </h1>
           </div>
 
-          <div className="hidden md:block">
-            <div className="ml-10 flex items-baseline space-x-4">
-              {["Home", "Projects", "Freelancers"].map((item) => (
-                <button
-                  key={item}
-                  className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-all duration-300 hover:bg-blue-700/30 relative group"
-                >
-                  {item}
-                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-400 group-hover:w-full transition-all duration-300"></span>
-                </button>
-              ))}
-            </div>
-          </div>
+          
+    <div className="hidden md:block">
+      <div className="ml-10 flex items-baseline space-x-4">
+        <button
+          onClick={() => navigate("/")}
+          className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-all duration-300 hover:bg-blue-700/30 relative group"
+        >
+          Home
+          <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-400 group-hover:w-full transition-all duration-300"></span>
+        </button>
+
+        <button
+          onClick={() => navigate("/projects")}
+          className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-all duration-300 hover:bg-blue-700/30 relative group"
+        >
+          Projects
+          <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-400 group-hover:w-full transition-all duration-300"></span>
+        </button>
+
+        <button
+          onClick={() => navigate("/freelancers")}
+          className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-all duration-300 hover:bg-blue-700/30 relative group"
+        >
+          Freelancers
+          <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-400 group-hover:w-full transition-all duration-300"></span>
+        </button>
+      </div>
+    </div>
 
           <div className="hidden md:flex items-center space-x-4">
             <button
@@ -99,9 +115,15 @@ const NavBar = () => {
                   <div className="absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5">
                     <button
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left"
-                      onClick={handleLogout}
+                      onClick={()=>{ navigate("/freelancerProfile");}}
                     >
-                      Logout
+                      Freelancer
+                    </button>
+                    <button
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left"
+                      onClick={()=>{ navigate("/clientProfile");}}
+                    >
+                      Client
                     </button>
                   </div>
                 )}
@@ -137,17 +159,41 @@ const NavBar = () => {
         </div>
       </div>
 
-      { user && (
+      { isOpen  && (
         <div className="md:hidden bg-gray-900/95 backdrop-blur-lg">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            {["Home", "Projects", "Freelancers"].map((item) => (
+            {/* {["Home", "Projects", "Freelancers"].map((item) => (
               <button
                 key={item}
                 className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium w-full text-left hover:bg-blue-700/30 transition-all duration-300"
               >
                 {item}
               </button>
-            ))}
+            ))} */}
+            <button
+          onClick={() => navigate("/")}
+          className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-all duration-300 hover:bg-blue-700/30 relative group"
+        >
+          Home
+          <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-400 group-hover:w-full transition-all duration-300"></span>
+        </button>
+
+        <button
+          onClick={() => navigate("/projects")}
+          className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-all duration-300 hover:bg-blue-700/30 relative group"
+        >
+          Projects
+          <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-400 group-hover:w-full transition-all duration-300"></span>
+        </button>
+
+        <button
+          onClick={() => navigate("/freelancers")}
+          className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-all duration-300 hover:bg-blue-700/30 relative group"
+        >
+          Freelancers
+          <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-400 group-hover:w-full transition-all duration-300"></span>
+        </button>
+ 
             <button
               onClick={handleWalletConnection}
               className="flex items-center w-full px-4 py-2 rounded-lg bg-gradient-to-r from-blue-500 to-teal-400 text-white font-medium transform transition-all duration-300 hover:scale-105 hover:shadow-lg active:scale-95"
@@ -157,14 +203,27 @@ const NavBar = () => {
                 ? truncateAddress(walletAddress)
                 : "Connect Wallet"}
             </button>
-            {isOpen ? (
+            {user ? (
+              <>
+              
               <button
-                onClick={handleLogout}
+               onClick={()=>{ navigate("/freelancerProfile");}}
+                className="w-full text-left px-3 py-2 text-gray-300 hover:text-white hover:bg-blue-700/30 rounded-md"
+                >
+                <FaUserCircle className="inline mr-2" />
+                Freelancer
+              </button>
+              
+              <button
+                onClick={()=>{ navigate("/clientProfile");}}
                 className="w-full text-left px-3 py-2 text-gray-300 hover:text-white hover:bg-blue-700/30 rounded-md"
               >
                 <FaUserCircle className="inline mr-2" />
-                Logout
+                Client
               </button>
+              
+
+                </>
             ) : (
               <>
                 <button

@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
-
 import RegistrationForm from "../Comp/RegistrationForm";
 import NavBar from "../Comp/Navbar";
 import Login from "../Comp/LoginForm";
@@ -8,6 +7,7 @@ import HeroSection from "../Comp/HeroSection";
 import DecentralizedFeatures from "../Comp/Features";
 import HowItWorks from "../Comp/HowItWorks";
 import Footer from "../Comp/Footer";
+
 
 function RegisterPage() {
   // Animation variants for scroll

@@ -1,3 +1,5 @@
+import ProjectCreationForm  from "../Comp/createPost";
+
 import { motion } from "framer-motion";
 import { useState } from "react";
 import RegistrationForm from "../comp/registrationForm";
@@ -5,10 +7,11 @@ import NavBar from "../Comp/Navbar";
 import LoginPage from "../Comp/LoginForm";
 import HeroSection from "../Comp/HeroSection";
 import DecentralizedFeatures from "../Comp/Features";
+import ClientProfile from "../Comp/ClientProfile";
 import HowItWorks from "../Comp/HowItWorks";
 import Footer from "../Comp/Footer";
-import CustomerSupport from "../Comp/CustomerSupport";
-function HomePage() {
+
+function ClientProfilePage() {
   // Animation variants for scroll
   const fadeIn = {
     hidden: { opacity: 0, y: 50 },
@@ -26,7 +29,7 @@ function HomePage() {
         viewport={{ once: false, amount: 0.2 }}
         transition={{ duration: 1, ease: "easeOut" }}
       >
-        <HeroSection />
+        <ClientProfile  />
       </motion.div>
 
       <motion.div
@@ -69,7 +72,7 @@ function HomePage() {
         viewport={{ once: false, amount: 0.2 }}
         transition={{ duration: 1, ease: "easeOut", delay: 0.6 }}
       >
-        <CustomerSupport />
+        {/* <LoginPage /> */}
       </motion.div>
 
 <Footer />
@@ -79,30 +82,6 @@ function HomePage() {
   );
 }
 
-export default HomePage;
+export default ClientProfilePage;
 
 
-
-// import { useState } from 'react'
-// import reactLogo from './assets/react.svg'
-// import viteLogo from '/vite.svg'
-// import './App.css'
-// import RegistrationForm from './comp/registrationForm'
-// import NavBar from './Comp/Navbar'
-// import LoginPage from './Comp/LoginForm'
-// import HeroSection from './Comp/HeroSection'
-// import DecentralizedFeatures from './Comp/Features'
-// function App() {
-  
-//   return (
-//     <>
-//      <NavBar />
-//      <HeroSection />
-//      <RegistrationForm />
-//      <DecentralizedFeatures />
-//      <LoginPage />
-//       </>
-//   )
-// }
-
-// export default App
