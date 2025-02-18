@@ -9,6 +9,7 @@ import HeroSection from "../Comp/HeroSection";
 import DecentralizedFeatures from "../Comp/Features";
 import HowItWorks from "../Comp/HowItWorks";
 import Footer from "../Comp/Footer";
+import CustomerSupport from "../Comp/CustomerSupport";
 
 function CreateProjectPostPage() {
   // Animation variants for scroll
